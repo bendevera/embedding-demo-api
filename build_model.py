@@ -1,4 +1,5 @@
 import json
+import pickle
 import numpy as np
 import os
 import random
@@ -49,6 +50,8 @@ print(y_train.mean(), y_test.mean())
 x_train = normalize(x_train)
 x_test = normalize(x_test)
 
+lib_path = "./app/lib/"
+
 # MODEL 1 - Logistic Regression
 # instantiate model
 model = LogisticRegression()
@@ -58,6 +61,10 @@ model.fit(x_train, y_train)
 print("Logistic Regression Test Score:")
 print(model.score(x_test, y_test))
 # last score: 95%
+# save model
+filename= lib_path+"lr.pkl"  
+with open(filename, 'wb') as file:  
+    pickle.dump(model, file)
 
 # MODEL 2 - Random Forest
 # instantiate model
@@ -79,3 +86,7 @@ model.fit(x_train, y_train)
 print("Linear SVC:")
 print(model.score(x_test, y_test))
 # last score:
+# save model
+filename= lib_path+"svc.pkl"  
+with open(filename, 'wb') as file:  
+    pickle.dump(model, file)
