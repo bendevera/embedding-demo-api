@@ -1,1 +1,1 @@
-web:gunicorn review_api:app
+web: gunicorn review_api:app
