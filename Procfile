@@ -1,1 +1,1 @@
-web: gunicorn review_api:app
+web: flask translate compile; gunicorn review_api:app
