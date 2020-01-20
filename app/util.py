@@ -20,6 +20,6 @@ def get_prediction(review):
     x[0] = get_embedding(review)
     prediction = model.predict_proba(x)[0]
     if prediction[0] > prediction[1]:
-        return {"sentiment": "Negative", "confidence": prediction[0]}
+        return {"sentiment": "Negative", "confidence": prediction[0], "review": review}
     else:
-        return {"sentiment": "Positive", "confidence": prediction[1]}
+        return {"sentiment": "Positive", "confidence": prediction[1], "review": review}
