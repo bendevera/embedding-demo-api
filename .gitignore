@@ -2,5 +2,6 @@ venv/
 data/
 .ipynb_checkpoints/
 embeddings/
+image-embeddings/
 __pycache__/
 .vscode/
