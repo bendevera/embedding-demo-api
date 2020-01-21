@@ -17,13 +17,15 @@ from scipy import stats
 import time
 import sys
 
-# https://www.basilica.ai/tutorials/how-to-train-an-image-model/
 
 EMB_DIR = './embeddings/'
 IMG_EMB_DIR = './image-embeddings/'
 IMG_PERSON_DIR = './data/images/'
 LIB_DIR = "./app/lib/"
 
+'''prep text data:
+- convert text to text embedding
+- structure every sample as a row'''
 def ready_text_data():
     files = [f for f in os.listdir(EMB_DIR)]
     # shuffle files in list
@@ -58,6 +60,10 @@ def ready_text_data():
     print(y_train.mean(), y_test.mean())
     return x_train, y_train, x_test, y_test
 
+'''preprocess images:
+- convert to image embedding
+- put each observation in "tidy" data format where each row is
+a sample'''
 def ready_image_data():
     files = [f for f in os.listdir(IMG_EMB_DIR)]
     random.seed(42)
@@ -112,7 +118,9 @@ def ready_image_data():
     
     return x_train, y_train, x_test, y_test
 
-
+''' Build Logistic Regression model
+that is trained and put into production predicting
+the sentiment of product review text embeddings'''
 def build_LR(x_train, y_train, x_test, y_test):
     x_train = normalize(x_train)
     x_test = normalize(x_test)
@@ -131,7 +139,8 @@ def build_LR(x_train, y_train, x_test, y_test):
     with open(filename, 'wb') as file:  
         pickle.dump(model, file)
 
-
+''' Build Random Forest model that is trained
+and used to predict the class of a "natural image"'''
 def build_IMG(x_train, y_train, x_test, y_test):
     x_train = normalize(x_train)
     x_test = normalize(x_test)
