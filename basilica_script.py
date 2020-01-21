@@ -2,6 +2,7 @@ import pandas as pd
 import basilica 
 import json
 import random
+from config import Config
 
 DATA_PATH = './data/'
 
@@ -12,7 +13,7 @@ negative = negative.reset_index()
 
 EMB_DIR = './embeddings/'
 
-with basilica.Connection('8b7c2d45-55d5-66ea-6128-9bbd53df7d7e') as c:
+with basilica.Connection(Config['basilica_key']) as c:
 
     def embed_reviews(cell, text_class):
         embedding = c.embed_sentence(cell['text'], model='product-reviews')

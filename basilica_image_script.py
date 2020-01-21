@@ -2,39 +2,39 @@ import basilica
 import json
 import random
 import os
+from config import Config
+
+'''
+Natural Image Dataset: https://www.kaggle.com/prasunroy/natural-images
+'''
 
 IMAGE_DATA_PATH = './data/images/'
 
 EMB_DIR = './image-embeddings/'
 
-with basilica.Connection('8b7c2d45-55d5-66ea-6128-9bbd53df7d7e') as c:
+issue_count = 0
 
-    def embed_image(image_file, person, count):
+with basilica.Connection(Config['basilica_key']) as c:
+
+    def embed_image(image_file, image_class, count):
+        global issue_count
         try:
             embedding = c.embed_image_file(image_file)
-            filename = EMB_DIR+person+'-'+count+'.emb'
-            print(f"Saving {filename} | {person} | {count} | {len(embedding)} ")
+            filename = EMB_DIR+image_class+'-'+count+'.emb'
+            print(f"Saving {filename} | {image_class} | {count} | {len(embedding)} ")
             with open(filename, 'w') as f:
                 f.write(json.dumps(embedding))
         except Exception as e:
+            issue_count += 1
             print(f"count {count} didn't go through")
 
-    log = {}
+    class_list = ['airplane', 'car', 'cat', 'dog', 'flower', 'fruit', 'motorbike', 'person']
+    completed = ['cat', 'car', 'fruit']
     for directory in os.listdir(IMAGE_DATA_PATH):
-        person = directory.lower().replace(" ", "-")
-        images = os.listdir(os.path.join(IMAGE_DATA_PATH, directory))
-        log[person] = len(images)
-    top10 = sorted(log.values(), reverse=True)[:10]
-    people = []
-    for key, value in log.items():
-        for val in top10:
-            if val == value:
-                people.append(key)
-    print(people)
-
-    # for directory in os.listdir(IMAGE_DATA_PATH):
-    #     person = directory.lower().replace(" ", "-")
-    #     if person in people:
-    #         for image in os.listdir(os.path.join(IMAGE_DATA_PATH, directory)):
-    #             count = image.split(".")[0]
-    #             embed_image(os.path.join(IMAGE_DATA_PATH, directory, image), person, count)
+        if directory in class_list and directory not in completed:
+            for image in os.listdir(os.path.join(IMAGE_DATA_PATH, directory)):
+                count = image.split("_")[1][:4]
+                embed_image(os.path.join(IMAGE_DATA_PATH, directory, image), directory, count)
+        else:
+            print(f"found a non class item or completed item: {directory}")
+    print(f"Num issues: {issue_count}")
