@@ -1,6 +1,6 @@
 from app import app as api 
 from flask import jsonify, request 
-from app.util import get_prediction, get_image_prediction
+from app.util import get_sentiment_prediction, get_image_prediction
 
 
 @api.route('/')
@@ -10,8 +10,7 @@ def index():
 @api.route('/predict/sentiment', methods=["POST"])
 def predict():
     params = request.json 
-    print(params)
-    prediction = get_prediction(params['review'])
+    prediction = get_sentiment_prediction(params['review'])
     return jsonify(prediction)
 
 @api.route('/predict/image', methods=["POST"])
@@ -20,5 +19,4 @@ def predict_image():
     if img is None:
         return jsonify({"message": "No file attached."})
     prediction = get_image_prediction(img)
-    print(prediction)
     return jsonify(prediction)
