@@ -7,7 +7,6 @@ import re
 #models
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.neighbors import KNeighborsClassifier
 #hyperparameter tuning
 from sklearn.model_selection import GridSearchCV
 #preprocessing
@@ -20,7 +19,6 @@ import sys
 
 EMB_DIR = './embeddings/'
 IMG_EMB_DIR = './image-embeddings/'
-IMG_PERSON_DIR = './data/images/'
 LIB_DIR = "./app/lib/"
 
 '''prep text data:
