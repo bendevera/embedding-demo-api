@@ -14,7 +14,7 @@ EMB_DIR = './image-embeddings/'
 
 issue_count = 0
 
-with basilica.Connection(Config['basilica_key']) as c:
+with basilica.Connection(Config.BASILICA_KEY) as c:
 
     def embed_image(image_file, image_class, count):
         global issue_count

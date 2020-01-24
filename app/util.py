@@ -6,10 +6,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import normalize
 import os
 import numpy as np
+from config import Config
 
-Config = {
-    "basilica_key": "8b7c2d45-55d5-66ea-6128-9bbd53df7d7e"
-}
 
 # load logistic regression model for sentiment predictions
 model = LogisticRegression()
@@ -33,7 +31,7 @@ for key, value in class_map.items():
     new_class_map[value] = key
 
 def get_embedding(data, data_type):
-    with basilica.Connection(Config['basilica_key']) as c:
+    with basilica.Connection(Config.BASILICA_KEY) as c:
         if data_type == 'text':
             return normalize([c.embed_sentence(data, model='product-reviews')])
         elif data_type == 'image':

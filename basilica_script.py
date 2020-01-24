@@ -15,7 +15,7 @@ EMB_DIR = './embeddings/'
 
 start_point = 91503
 
-with basilica.Connection(Config['basilica_key']) as c:
+with basilica.Connection(Config.BASILICA_KEY) as c:
 
     def embed_reviews(cell, text_class):
         global start_point
