@@ -5,3 +5,4 @@ embeddings/
 image-embeddings/
 __pycache__/
 .vscode/
+config.py
