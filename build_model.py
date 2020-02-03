@@ -184,6 +184,8 @@ if __name__ == '__main__':
             build_IMG(x_train, y_train, x_test, y_test)
         elif sys.argv[1] == 'both':
             x_train, y_train, x_test, y_test = ready_text_data()
-            X_train, Y_train, X_test, Y_test = ready_image_data()
+            build_LR(x_train, y_train, x_test, y_test)
+            x_train, y_train, x_test, y_test = ready_image_data()
+            build_IMG(x_train, y_train, x_test, y_test)
         else:
             print("Invalid argument -- lr|img|both")
