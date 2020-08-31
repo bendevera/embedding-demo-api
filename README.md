@@ -27,41 +27,45 @@ REST API for review sentiment and natural image classification web app.
 ### "/predict/sentiment" - [POST] - get product review sentiment prediction
 
 ex request json:
-
+```
 {
   "review": "Text of the review"
 }
+```
 
 ex response json:
-
+```
 {
   "class": "positive"/"negative",
   "confidence": 1-0,
   "review": "text of the review"
 }
+```
 
 ### "/predict/image" - [POST] - get natural image class prediction
 
 request body has image named as "file".
 
 ex response json:
-
+```
 {
   "class": "airplane"/"person"/"car"/"cat"/"dog"/"fruit"/"flower"/"motorbike",
   "confidence": 1-0
 }
+```
 
 ### "/accuracy/sentiment" - [POST] - route to track whether prediction was correct or incorrect
 
 ex request json:
-
+```
 {
   "answer": "correct"/"incorrect",
   "prediction": "positive"/"negative"
 }
+```
 
 ex response json:
-
+```
 {
   "total": int,
   "true_positives": int,
@@ -69,3 +73,4 @@ ex response json:
   "false_positives": int,
   "false_negatives": int
 }
+```
