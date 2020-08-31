@@ -6,3 +6,6 @@ image-embeddings/
 __pycache__/
 .vscode/
 config.py
+lib/
+migrations
+app.db

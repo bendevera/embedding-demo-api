@@ -2,9 +2,12 @@
 
 REST API for review sentiment and natural image classification web app.
 
+[Live Deployment](https://embedding-demo.herokuapp.com/)
+
 ## setup 
 - install dependencies running `pip install -r requirements.txt`
 - get basilica API key and input into basilica scripts
+- navigate to `training` directory
 - run both basilica scripts
   - `python basilica_scripty.py`
   - `python basilica_image_script.py`
@@ -19,7 +22,7 @@ REST API for review sentiment and natural image classification web app.
   - `flask run`
   
 ## routes
-### "/" - [GET] - simple dummy route to ping when needing to know if api is running
+### "/" - [GET] - simple ping with 'hello' response
 
 ### "/predict/sentiment" - [POST] - get product review sentiment prediction
 

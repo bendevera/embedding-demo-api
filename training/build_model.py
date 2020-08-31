@@ -19,7 +19,7 @@ import sys
 
 EMB_DIR = './embeddings/'
 IMG_EMB_DIR = './image-embeddings/'
-LIB_DIR = "./app/lib/"
+LIB_DIR = "../app/lib/"
 
 '''prep text data:
 - convert text to text embedding
@@ -148,6 +148,7 @@ def build_IMG(x_train, y_train, x_test, y_test):
     2. Logistic regression
     3. Kneighbors
     '''
+    # Hyperparemeter search code:
     # model = RandomForestClassifier()
     # params = {
     #     "min_samples_leaf": [2, 3, 4]
